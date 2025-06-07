@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ItemForm from "./ItemForm"; // Make sure this file exists
 
 function NavBar() {
   return (
@@ -16,25 +17,28 @@ function Home() {
   );
 }
 
-{/* write an <About> component here */}
 function About() {
   return (
     <div id="about">
-    <h2>About</h2>
-  </div>
-  )
+      <h2>About</h2>
+    </div>
+  );
 }
 
-
 function App() {
+  const [items, setItems] = useState([]);
+
+  function handleItemFormSubmit(newItem) {
+    setItems([...items, newItem]); // immutable update
+  }
+
   return (
     <div>
       <NavBar />
-      {/* add the <Home> component here */}
-      <NavBar/>
-      <Home/>
-      {/* add your <About> component here */}
-      <About/>
+      <Home />
+      <About />
+      <ItemForm onItemFormSubmit={handleItemFormSubmit} />
+      {/* Add ItemList here if you're displaying the list */}
     </div>
   );
 }
